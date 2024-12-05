@@ -1,0 +1,109 @@
+/* styles.css */
+
+/* General body styling */
+body {
+  font-family: monospace, monospace;
+  background-color: #222222;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Form container */
+form {
+  background-color: #353935;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+
+  
+}
+
+/* Form title */
+form h3 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #ffffff;
+  text-align: center;
+}
+
+/* Form group styling */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  color: #ffffff;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+}
+
+/**/
+.form-group input:focus {
+  border-color: #000000;
+  outline: none;
+  box-shadow: 0 0 3px rgba(34, 34, 35, 0.5);
+}
+
+/* Submit button styling */
+button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #222222;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #000000;
+}
+
+/* Additional spacing */
+br {
+  margin-top: 10px;
+}
+.navbar {
+  justify-content: flex-start; /* Aligns items to the left */
+  padding-left: 10px; /* Adds space from the left edge */
+}
+
+/* per word lang sia sa nav bar */
+.nav-item {
+  margin-right: 15px; /* Adds spacing between navigation links */
+  margin-left: 10px; /* Adds spacing between each link */
+
+}
+
+body {
+  padding-top: 56px; /* Prevents the navbar from overlapping content */
+}
+
+
+.navbar-nav {
+  align-items: center; /* Vertically aligns the links in the navbar */
+}
+
+.notes{
+  color: #ffffff;
+  background-color: #ffffff;
+}
