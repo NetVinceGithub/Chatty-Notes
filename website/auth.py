@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .models import User
+from .models import User, Admin
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db   ##means from __init__.py import db
 from flask_login import login_user, login_required, logout_user, current_user
@@ -64,3 +64,38 @@ def sign_up():
             return redirect(url_for('views.home'))
 
     return render_template("sign_up.html", user=current_user)
+
+
+@auth.route('/admin-login', methods=['GET', 'POST'])
+def admin_login():
+    if request.method == 'POST':
+        email = request.form.get('admin-email')
+        password = request.form.get('password')
+
+        admin = Admin.query.filter_by(email=email).first()
+
+        if admin:
+            if admin.password and check_password_hash(admin.password, password):
+                flash('Logged in successfully!', category='success')
+                login_user(admin, remember=True)
+                return redirect(url_for('views.admin_dashboard'))  # Correctly redirect to dashboard
+            else:
+                flash('Invalid credentials. Please try again.', category='error')
+        else:
+            flash('Admin account does not exist.', category='error')
+
+    return render_template("admin-login.html", user=current_user)
+
+
+
+
+@auth.route('/admin', methods=['GET'])
+@login_required
+def admin():
+    if not isinstance(current_user, Admin):
+        flash('You must be an admin to access this page.', category='error')
+        return redirect(url_for('auth.admin'))
+
+    users = User.query.all()  # Query all users to display in the admin dashboard
+    return render_template("admin-dashboard.html", user=current_user, users=users)
+

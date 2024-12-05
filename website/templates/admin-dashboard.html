@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+Admin Dashboard
+{% endblock %}
+
+{% block content %}
+<h1 align="center" class="admin-title">Admin Dashboard</h1>
+<h2 class="admin-table-title">Registered Users</h2>
+
+<div class="table-contents">
+    <table border="1" class="table-contents">
+        <tr class="table-contents">
+            <th>ID</th>
+            <th>Email</th>
+            <th>First Name</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.first_name }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
