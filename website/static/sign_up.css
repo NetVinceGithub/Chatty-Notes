@@ -105,5 +105,27 @@ body {
 
 .notes{
   color: #ffffff;
-  background-color: #ffffff;
+  background-color: #222222;
+}
+
+.profile-table{
+  color: #ffffff;
+  background-color:222222;
+}
+
+.profile-data{
+  color: #ffffff;
+}
+
+.profile{
+  position: fixed;
+  left: 10px;
+  top:80px;
+  width: 300px;
+  border: 3px solid #cacdc5;
+  border-radius:10px;
+}
+
+.profile-title{
+  color: #ffffff;
 }

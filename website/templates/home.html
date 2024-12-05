@@ -5,12 +5,38 @@
     {% for note in user.notes %}
     <li class="list-group-item">
       {{ note.data }}
+      {{ note.date }}
       <button type="button" class="close" onClick="deleteNote({{ note.id }})">
         <span aria-hidden="true">&times;</span>
       </button>
     </li>
-    {% endfor %}
+    
   </ul>
+
+
+  <div class="profile">
+
+    <h1 align="center" class="profile-title">Profile Information</h1>
+    <ul class="list-group list-group-flush" id="users">
+      
+      <li class="profile-table">
+        <div class="profile-data">
+          {{ user.first_name }}
+        </div>
+
+        <div class="profile-data">
+          {{ user.email }}
+        </div>
+
+        <div class="profile-data">
+          {{ user.id }}
+        </div>
+        
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
   <form method="POST">
     <textarea name="note" id="note" class="form-control"></textarea>
     <br />
