@@ -110,20 +110,23 @@ body {
 
 .profile-table{
   color: #ffffff;
-  background-color:222222;
+  margin-left: 40px;
+
 }
 
 .profile-data{
   color: #ffffff;
+  margin: auto;
 }
 
 .profile{
   position: fixed;
   left: 10px;
-  top:80px;
+  bottom: 20px;
   width: 300px;
-  border: 3px solid #cacdc5;
+  border: 3px solid #222222;
   border-radius:10px;
+  background-color: #353935;
 }
 
 .profile-title{

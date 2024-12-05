@@ -21,6 +21,16 @@
     <title>{% block title %}Home{% endblock %}</title>
 
     <style>
+    
+    #profinfo {
+    font-size: 0.75rem; /* Smaller font size */
+    line-height: 1rem; /* Reduce line height to make it compact */
+    padding: 0.2rem 0.4rem; /* Adjust padding for a compressed appearance */
+    margin: 0; /* Remove extra margins */
+    text-align: center;
+
+  }
+
       /* Notification Container */
       .notification-container {
         position: fixed; /* Fixed position on the viewport */
@@ -44,7 +54,12 @@
         <div class="navbar-nav ml-auto d-flex flex-row">
           {% if user.is_authenticated %}
           <a class="nav-item nav-link" id="home" href="/">Home</a>
-          <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+          <a class="nav-item nav-link" id="profinfo" href="/profinfo">
+            <span class="profile-text">Profile</span><br />
+            <span class="info-text">Information</span>
+          </a>          
+          <a class="nav-item nav-link" id="logout" href="/logout">Log out</a>
+          
           {% else %}
           <a class="nav-item nav-link" id="login" href="/login">Login</a>
           <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
