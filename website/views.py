@@ -1,6 +1,6 @@
-from flask import Blueprint, render_template, request, flash, jsonify
+from flask import Blueprint, redirect, render_template, request, flash, jsonify, url_for
 from flask_login import login_required, current_user
-from .models import Note, User
+from .models import Admin, Note, User
 from . import db
 import json
 
@@ -22,6 +22,20 @@ def home():
             flash('Note added!', category='success')
 
     return render_template("home.html", user=current_user)
+
+
+
+@views.route('/admin-dashboard', methods=['GET'])
+@login_required
+def admin_dashboard():
+    if not isinstance(current_user, Admin):
+        flash('You must be an admin to access this page.', category='error')
+        #return redirect(url_for('auth.admin_login'))
+        users = User.query.all()  # Query all users to display in the admin dashboard
+        return render_template("admin-dashboard.html", user=current_user, users=users)
+    users = User.query.all()  # Query all users to display in the admin dashboard
+    return render_template("admin-dashboard.html", user=current_user, users=users)
+
 
 
 @views.route('/delete-note', methods=['POST'])
