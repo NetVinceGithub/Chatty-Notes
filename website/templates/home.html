@@ -1,48 +1,51 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
-  %}
-  <h1 align="center" class="notes">Notes</h1>
-  <ul class="list-group list-group-flush" id="notes">
+{% extends "base.html" %} 
+{% block title %}Home{% endblock %} 
+{% block content %}
+
+<div align="center" class="input-block">
+  <p class="links">Links</p>
+  <ul class="data-list" id="notes">
     {% for note in user.notes %}
-    <li class="list-group-item">
+    <li class="data-list">
       {{ note.data }}
       {{ note.date }}
       <button type="button" class="close" onClick="deleteNote({{ note.id }})">
         <span aria-hidden="true">&times;</span>
       </button>
     </li>
-    
+    {% endfor %}
   </ul>
+</div>
 
-
+<div align="center" class="link-container">
   <div class="profile">
-
-    <h1 align="center" class="profile-title">Profile Information</h1>
-    <ul class="list-group list-group-flush" id="users">
-      
+    <p align="center" class="profile-title">Profile Information</p>
+    <ul align="center" class="list-group list-group-flush" id="users">
       <li class="profile-table">
-        <div class="profile-data">
-          {{ user.first_name }}
+        <div class="profile-row">
+          <div class="profile-label">Name:</div>
+          <div class="profile-data">{{ user.first_name }}</div>
         </div>
-
-        <div class="profile-data">
-          {{ user.email }}
+        <div class="profile-row">
+          <div class="profile-label">Email:</div>
+          <div class="profile-data">{{ user.email }}</div>
         </div>
-
-        <div class="profile-data">
-          {{ user.id }}
+        <div class="profile-row">
+          <div class="profile-label">ID:</div>
+          <div class="profile-data">{{ user.id }}</div>
         </div>
-        
       </li>
-      {% endfor %}
     </ul>
   </div>
+</div>
 
+<div class="button-block">
   <form method="POST">
-    <textarea name="note" id="note" class="form-control"></textarea>
+    <textarea name="note" id="note" class="form-control" required></textarea>
     <br />
     <div align="center">
       <button type="submit" class="btn btn-primary">Add Note</button>
     </div>
   </form>
-  
-  {% endblock %}
+</div>
+{% endblock %}

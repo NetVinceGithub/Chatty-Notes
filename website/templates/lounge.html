@@ -1,0 +1,32 @@
+{% extends "base.html" %} 
+{% block title %}Home{% endblock %} 
+{% block content %}
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lounge</title>
+</head>
+<body>
+  <div class="fixed-box">
+   
+  </div>
+
+  <div class="content">
+   
+  </div>
+</body>
+
+<div align="center" class="message-button">
+  <form method="POST">
+    <textarea name="message" id="message" class="message-area" required></textarea>
+    <br />
+    <div align="center">
+      <button type="submit" class="btn btn-primary">Add Message</button>
+    </div>
+  </form>
+</div>
+
+
+{% endblock %}
