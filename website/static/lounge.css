@@ -1,0 +1,30 @@
+/* Style for the fixed div */
+.fixed-box {
+  position: fixed; /* Keeps it fixed on the screen */
+  width: 300px; /* Fixed width */
+  height: 80%; /* Fixed height */
+  padding: 20px; /* Padding inside the box */
+  background-color: #f0f0f0; /* Light grey background */
+  border: 3px solid green; /* Green border */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for a 3D effect */
+  text-align: center; /* Center text inside */
+  
+  /* Centering on the screen */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Moves the element back by half its own width and height */
+  z-index: 1000; /* Ensure it stays on top of other elements */
+}
+
+/* Example page content */
+.content {
+  margin: 20px;
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+}
+
+.message-button{
+  position:fixed;
+  bottom:0;
+}

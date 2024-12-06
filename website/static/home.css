@@ -1,0 +1,51 @@
+.links{
+  color: #ffffff;
+  background-color: #222222;
+}
+
+.profile{
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 250px;
+    height:140px;
+    border: 3px solid #73AD21;
+  }
+
+  .profile-row {
+    display: flex;
+    margin-bottom: 3px;
+  }
+  
+  .profile-label {
+    font-weight: bold;
+    width: 50px; /* Adjust width as needed */
+  }
+  
+  .profile-data {
+    
+  }
+
+.data-list{
+  background-color: white;
+  width:400px;
+  height:40px;
+}
+
+.button-block{
+  position: fixed;
+  top: 320px;
+  right: 250px;
+  width: 250px;
+  height:140px;
+}
+
+.link-container{
+  position: fixed;
+
+}
+
+.data-list{
+  list-style: none;
+}
+

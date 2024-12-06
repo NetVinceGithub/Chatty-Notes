@@ -24,6 +24,12 @@ def home():
     return render_template("home.html", user=current_user)
 
 
+@views.route('/lounge', methods=['GET', 'POST'])
+@login_required
+def lounge():
+    
+    return render_template("lounge.html", user=current_user)
+
 
 @views.route('/admin-dashboard', methods=['GET'])
 @login_required
