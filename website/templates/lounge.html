@@ -1,32 +1,33 @@
-{% extends "base.html" %} 
-{% block title %}Home{% endblock %} 
+{% extends "base.html" %}
+{% block title %}Lounge{% endblock %}
 {% block content %}
 
+<div align="center" class="input-block">
+  <p class="links">Links</p>
+  <ul class="data-list" id="notes">
+    {% for chat in chats %}
+    <li class="data-list">
+        {{ chat.user.first_name }}:
+        {{ chat.chat }} - {{ chat.date.strftime('%Y-%m-%d %H:%M:%S') }}
+        
+        <button type="button" class="close" onClick="deleteChat({{ chat.id }})">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </li>
+    {% else %}
+    <p>No chats available.</p>
+    {% endfor %}
+  </ul>
+</div>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lounge</title>
-</head>
-<body>
-  <div class="fixed-box">
-   
-  </div>
-
-  <div class="content">
-   
-  </div>
-</body>
-
-<div align="center" class="message-button">
+<div align="center" class="chat-button">
   <form method="POST">
-    <textarea name="message" id="message" class="message-area" required></textarea>
+    <textarea name="chat" id="chat" class="chat-area" required></textarea>
     <br />
     <div align="center">
       <button type="submit" class="btn btn-primary">Add Message</button>
     </div>
   </form>
 </div>
-
 
 {% endblock %}

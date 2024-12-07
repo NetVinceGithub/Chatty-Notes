@@ -1,6 +1,6 @@
 from flask import Blueprint, redirect, render_template, request, flash, jsonify, url_for
 from flask_login import login_required, current_user
-from .models import Admin, Note, User
+from .models import Admin, Note, User, Chat
 from . import db
 import json
 
@@ -24,11 +24,27 @@ def home():
     return render_template("home.html", user=current_user)
 
 
+
+
+
 @views.route('/lounge', methods=['GET', 'POST'])
 @login_required
 def lounge():
+    if request.method == 'POST': 
+        chat = request.form.get('chat') 
+        if len(chat) < 1:
+            flash('Chat message is too short!', category='error') 
+        else:
+            new_chat = Chat(chat=chat, user_id=current_user.id)
+            db.session.add(new_chat)
+            db.session.commit()
+            flash('Chat added!', category='success')
     
-    return render_template("lounge.html", user=current_user)
+    # Query all chats to pass to the template
+    all_chats = Chat.query.order_by(Chat.date.desc()).all()
+    return render_template("lounge.html", user=current_user, chats=all_chats)
+    
+    
 
 
 @views.route('/admin-dashboard', methods=['GET'])
@@ -52,6 +68,18 @@ def delete_note():
     if note:
         if note.user_id == current_user.id:
             db.session.delete(note)
+            db.session.commit()
+
+    return jsonify({})
+
+@views.route('/delete-chat', methods=['POST'])
+def delete_chat():  
+    chat = json.loads(request.data) # this function expects a JSON from the INDEX.js file 
+    chatId = chat['chatId']
+    chat = Chat.query.get(chatId)
+    if chat:
+        if chat.user_id == current_user.id:
+            db.session.delete(chat)
             db.session.commit()
 
     return jsonify({})
