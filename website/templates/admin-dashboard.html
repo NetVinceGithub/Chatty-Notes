@@ -1,27 +1,48 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
+{% block title %}Home{% endblock %} 
 
-{% block title %}
-Admin Dashboard
-{% endblock %}
+
+
 
 {% block content %}
 <h2 align="center" class="admin-title">Admin Dashboard</h2>
 
 <div align="center" class="admin-table-contents">
- <p class="admin-table-title">Registered Users</p>
-    <table border="1" class="table-contents">
-        <tr class="table-contents">
-            <th>ID</th>
-            <th>Email</th>
-            <th>First Name</th>
-        </tr>
-        {% for user in users %}
-        <tr>
-            <td>{{ user.id }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.first_name }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+  <p class="admin-table-title">Registered Users</p>
+  <table border="1" class="table-contents">
+    <tr class="table-contents">
+      <th>ID</th>
+      <th>Email</th>
+      <th>Full Name</th>
+      <th>Actions</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+      <td>{{ user.id }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.first_name }}</td>
+      <td>
+        <!-- Edit User Button -->
+        <button onclick="editUser({{ user.id }}, '{{ user.email }}', '{{ user.first_name }}')">Edit</button>
+        <!-- Delete User Button -->
+        <button onclick="deleteUser({{ user.id }})">Delete</button>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+<!-- Form to Add New User -->
+<div align="center" class="add-user-form admin-title">
+  <h3>Add New User</h3>
+  <form method="POST" action="/add-user">
+    <label for="email">Email:</label>
+    <input type="email" name="email" required>
+    <label for="first_name">First Name:</label>
+    <input type="text" name="first_name" required>
+    <label for="password">Password:</label>
+    <input type="password" name="password" required>
+    <button type="submit">Add User</button>
+  </form>
 </div>
 {% endblock %}
