@@ -124,6 +124,23 @@
         });
       }
 
+      function deleteAllChats() {
+      if (confirm('Are you sure you want to delete all chats?')) {
+    fetch('/delete-all-chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then((response) => {
+      if (response.ok) {
+        alert('All chats deleted successfully.');
+        window.location.reload();
+      } else {
+        alert('Error deleting all chats.');
+      }
+    });
+  }
+}
+
       function deleteUser(userId) {
       if (confirm('Are you sure you want to delete this user and their chats?')) {
         fetch('/delete-user', {
