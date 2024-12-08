@@ -28,3 +28,64 @@
   position:fixed;
   bottom:0;
 }
+
+.input-block {
+  margin-top: 60px; /* Adjust based on your navbar height */
+  width: 90%;
+  height: 750px; /* Adjust height to keep below navbar and maintain spacing */
+  overflow-y: auto; /* Enable scrolling */
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.data-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.data-item {
+  display: flex; /* Aligns items properly */
+  flex-direction: column; /* Stacks user/message/date vertically */
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 70%;
+  width: fit-content; /* Ensures the width adjusts to the content */
+  word-wrap: break-word; /* Wrap long text to prevent overflow */
+}
+
+.user-chat {
+  margin-left: auto; /* Aligns user messages to the right */
+  background-color: #d1e7dd; /* Light green for user's messages */
+  text-align: right;
+  width: 100%; /* Ensures background color spans the full width */
+}
+
+.other-chat {
+  margin-right: auto; /* Aligns other users' messages to the left */
+  background-color: #f8d7da; /* Light red for other users' messages */
+  text-align: left;
+  width: 100%; /* Ensures background color spans the full width */
+}
+
+.chat-user {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.chat-message {
+  display: block; /* Ensures the message spans a full block */
+  word-wrap: break-word; /* Prevents overflow for long words */
+  padding: 5px 0;
+}
+
+.chat-date {
+  display: block;
+  font-size: 0.8em;
+  color: gray;
+  margin-top: 5px;
+}
+

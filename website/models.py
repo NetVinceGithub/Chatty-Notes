@@ -15,7 +15,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
     notes = db.relationship('Note')
-    chats = db.relationship('Chat')
+    chats = db.relationship('Chat') 
 
 class Admin(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
