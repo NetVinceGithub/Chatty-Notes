@@ -1,9 +1,6 @@
 {% extends "base.html" %} 
 {% block title %}Home{% endblock %} 
 
-
-
-
 {% block content %}
 <h2 align="center" class="admin-title">Admin Dashboard</h2>
 
@@ -32,17 +29,51 @@
   </table>
 </div>
 
-<!-- Form to Add New User -->
-<div align="center" class="add-user-form admin-title">
-  <h3>Add New User</h3>
-  <form method="POST" action="/add-user">
-    <label for="email">Email:</label>
-    <input type="email" name="email" required>
-    <label for="first_name">First Name:</label>
-    <input type="text" name="first_name" required>
-    <label for="password">Password:</label>
-    <input type="password" name="password" required>
-    <button type="submit">Add User</button>
-  </form>
+<div align="center" class="admin-table-contents">
+    <p class="admin-table-title">Admin</p>
+    <table border="1" class="table-contents">
+      <tr class="table-contents">
+        <th>ID</th>
+        <th>Email</th>
+        <th>Full Name</th>
+        <th>Actions</th>
+      </tr>
+      {% for admin in admins %}
+      <tr>
+        <td>{{ admin.id }}</td>
+        <td>{{ admin.email }}</td>
+   
+        <td>
+          <button onclick="editUser({{ admin.id }}, '{{ admin.email }}', '{{ admin.first_name }}')">Edit</button>
+          <button onclick="deleteUser({{ admin.id }})">Delete</button>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  
+
+<div class="delete-all-chat">
+    <button onclick="deleteAllChats()">Delete All Chats</button>
 </div>
+  
+
+<div align="center" class="add-admin-form admin-title">
+    <h3>Add Admin</h3>
+    <form method="POST" action="/add-admin">
+      <label for="email" >Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="full_name" >Full Name:</label>
+      <input type="text" id="full_name"name="first_name" required>
+      
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+      <button type="submit">Add Admin</button>
+    </form>
+</div>
+
+
+
+
 {% endblock %}
