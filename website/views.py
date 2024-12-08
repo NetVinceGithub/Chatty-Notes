@@ -25,8 +25,6 @@ def home():
 
 
 
-
-
 @views.route('/lounge', methods=['GET', 'POST'])
 @login_required
 def lounge():
@@ -58,6 +56,79 @@ def admin_dashboard():
     users = User.query.all()  # Query all users to display in the admin dashboard
     return render_template("admin-dashboard.html", user=current_user, users=users)
 
+
+@views.route('/add-user', methods=['POST'])
+@login_required
+def add_user():
+    if isinstance(current_user, Admin):
+        flash('Access Denied: Only admins can add users.', category='error')
+        return redirect(url_for('views.admin_dashboard'))
+
+    email = request.form.get('email')
+    first_name = request.form.get('first_name')
+    password = request.form.get('password')
+
+    # Check for duplicate emails
+    if User.query.filter_by(email=email).first():
+        flash('Email already exists.', category='error')
+        return redirect(url_for('views.admin_dashboard'))
+
+    new_user = User(email=email, first_name=first_name, password=password)
+    db.session.add(new_user)
+    db.session.commit()
+    flash('User added successfully!', category='success')
+    return redirect(url_for('views.admin_dashboard'))
+
+
+
+@views.route('/delete-user', methods=['POST'])
+@login_required
+def delete_user():
+    if isinstance(current_user, Admin):  # Ensure only admins can delete users
+        flash('Access Denied: Only admins can delete users.', category='error')
+        return jsonify({'success': False}), 403
+
+    user_data = json.loads(request.data)
+    user_id = user_data.get('userId')
+    user = User.query.get(user_id)
+
+    if user:
+        # Delete all chats associated with the user
+        chats = Chat.query.filter_by(user_id=user_id).all()
+        for chat in chats:
+            db.session.delete(chat)
+        
+        # Delete the user
+        db.session.delete(user)
+        db.session.commit()
+
+        flash('User and their chats were successfully deleted.', category='success')
+        return jsonify({'success': True})
+    
+    flash('User not found.', category='error')
+    return jsonify({'success': False}), 404
+
+
+
+@views.route('/edit-user', methods=['POST'])
+@login_required
+def edit_user():
+    if isinstance(current_user, Admin):
+        flash('Access Denied: Only admins can edit users.', category='error')
+        return jsonify({'success': False}), 403
+
+    user_data = json.loads(request.data)
+    user_id = user_data.get('userId')
+    email = user_data.get('email')
+    first_name = user_data.get('first_name')
+
+    user = User.query.get(user_id)
+    if user:
+        user.email = email
+        user.first_name = first_name
+        db.session.commit()
+        return jsonify({'success': True})
+    return jsonify({'success': False}), 404
 
 
 @views.route('/delete-note', methods=['POST'])
