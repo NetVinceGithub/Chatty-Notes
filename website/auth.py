@@ -65,6 +65,32 @@ def sign_up():
 
     return render_template("sign_up.html", user=current_user)
 
+@auth.route('/admin-addition', methods=['GET', 'POST'])
+def admin_addition():
+    if request.method == 'POST':
+        email = request.form.get('admin-email')
+        full_name = request.form.get('full_name')
+        password = request.form.get('password')
+
+        admin = Admin.query.filter_by(email=email).first()
+        if admin:
+            flash('Email already exists.', category='error')
+        elif len(email) < 4:
+            flash('Email must be greater than 3 characters.', category='error')
+        elif len(password) < 7:
+            flash('Password must be at least 7 characters.', category='error')
+        else:
+          
+            new_admin = Admin(email=email, full_name=full_name, password=generate_password_hash(password, method='pbkdf2:sha256'))
+            db.session.add(new_admin)
+            db.session.commit()
+            login_user(new_admin, remember=True)
+            flash('Account created!', category='success')
+            return render_template("admin-dashboard.html", user=current_user)
+
+
+    return render_template("admin-dashboard.html", user=current_user)
+
 
 @auth.route('/admin-login', methods=['GET', 'POST'])
 def admin_login():
@@ -95,7 +121,8 @@ def admin():
     if not isinstance(current_user, Admin):
         flash('You must be an admin to access this page.', category='error')
         return redirect(url_for('auth.admin'))
-
+    admins= Admin.query.all()
     users = User.query.all()  # Query all users to display in the admin dashboard
-    return render_template("admin-dashboard.html", user=current_user, users=users)
+    
+    return render_template("admin-dashboard.html", user=current_user, users=users, admins=admins)
 

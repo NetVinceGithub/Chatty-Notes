@@ -52,10 +52,35 @@ def admin_dashboard():
         flash('You must be an admin to access this page.', category='error')
         #return redirect(url_for('auth.admin_login'))
         users = User.query.all()  # Query all users to display in the admin dashboard
+
+        admins=Admin.query.all()
         return render_template("admin-dashboard.html", user=current_user, users=users)
     users = User.query.all()  # Query all users to display in the admin dashboard
-    return render_template("admin-dashboard.html", user=current_user, users=users)
+    admins=Admin.query.all()
+    return render_template("admin-dashboard.html", user=current_user, users=users, admins=admins)
 
+
+@views.route('/add-admin', methods=['POST'])
+@login_required
+def add_admin():
+    if isinstance(current_user, Admin):
+        flash('Access Denied: Only admins can add users.', category='error')
+        return redirect(url_for('views.admin_dashboard'))
+
+    email = request.form.get('email')
+    full_name = request.form.get('full_name')
+    password = request.form.get('password')
+
+    # Check for duplicate emails
+    if Admin.query.filter_by(email=email).first():
+        flash('Email already exists.', category='error')
+        return redirect(url_for('views.admin_dashboard'))
+
+    new_admin = Admin(email=email, full_name=full_name, password=password)
+    db.session.add(new_admin)
+    db.session.commit()
+    flash('User added successfully!', category='success')
+    return redirect(url_for('views.admin_dashboard'))
 
 @views.route('/add-user', methods=['POST'])
 @login_required
@@ -78,8 +103,6 @@ def add_user():
     db.session.commit()
     flash('User added successfully!', category='success')
     return redirect(url_for('views.admin_dashboard'))
-
-
 
 @views.route('/delete-user', methods=['POST'])
 @login_required
@@ -154,3 +177,21 @@ def delete_chat():
             db.session.commit()
 
     return jsonify({})
+
+@views.route('/delete-all-chat', methods=['POST'])
+@login_required
+def delete_all_chats():
+    if isinstance(current_user, Admin):  # Ensure only admins can perform this action
+        flash('Access Denied: Only admins can delete all chats.', category='error')
+        return jsonify({'success': False}), 403
+
+    try:
+        # Delete all chats
+        db.session.query(Chat).delete()
+        db.session.commit()
+        flash('All chats deleted successfully!', category='success')
+        return jsonify({'success': True})
+    except Exception as e:
+        db.session.rollback()
+        flash('An error occurred while deleting chats.', category='error')
+        return jsonify({'success': False}), 500
