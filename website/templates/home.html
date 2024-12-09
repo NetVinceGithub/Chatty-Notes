@@ -2,13 +2,13 @@
 {% block title %}Home{% endblock %} 
 {% block content %}
 
+
 <div align="center" class="input-block">
   <p class="links">Links</p>
   <ul class="data-list" id="notes">
     {% for note in user.notes %}
     <li class="data-list">
-      {{ note.data }}
-      {{ note.date }}
+      <a href="{{ note.data }}" target="_blank" rel="noopener noreferrer">{{ note.data }}</a>
       <button type="button" class="close" onClick="deleteNote({{ note.id }})">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -16,6 +16,7 @@
     {% endfor %}
   </ul>
 </div>
+
 
 <div align="center" class="link-container">
   <div class="profile">
