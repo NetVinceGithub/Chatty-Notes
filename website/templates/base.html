@@ -140,7 +140,6 @@
     });
   }
 }
-
       function deleteUser(userId) {
       if (confirm('Are you sure you want to delete this user and their chats?')) {
         fetch('/delete-user', {
@@ -158,7 +157,6 @@
         }
       }
 
-
   function editUser(userId, email, firstName) {
     const newEmail = prompt('Enter new email:', email);
     const newFirstName = prompt('Enter new first name:', firstName);
@@ -175,6 +173,8 @@
       });
     }
   }
+
+  
 
     </script>
     {% endblock %}

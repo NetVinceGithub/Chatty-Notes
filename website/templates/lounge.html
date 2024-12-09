@@ -2,39 +2,45 @@
 {% block title %}Lounge{% endblock %}
 {% block content %}
 
-<div align="center" class="input-block">
-  <p class="lounge">Lounge</p>
-  <ul class="data-list" id="notes">
-    {% for chat in chats %}
-    <li 
-      class="data-item {% if chat.user.id == current_user.id %}user-chat{% else %}other-chat{% endif %}">
-      <span class="chat-user">
-        {% if chat.user.id != current_user.id %}
-          {{ chat.user.first_name }}:
-        {% endif %}
-      </span>
-      <span class="chat-message">
-        {{ chat.chat }}
-      </span>
-      <span class="chat-date">
-        {{ chat.date.strftime('%Y-%m-%d') }}
-      </span>
-    </li>
-    {% else %}
-    <p>No chats available.</p>
-    {% endfor %}
-  </ul>
+<div class="input-block">
+  <div>
+    <p class="lounge">Lounge</p>
+    <ul class="data-list" id="notes">
+      {% for chat in chats %}
+      <li 
+        class="data-item {% if chat.user.id == current_user.id %}user-chat{% else %}other-chat{% endif %}">
+        <span class="chat-user">
+          {% if chat.user.id != current_user.id %}
+            {{ chat.user.first_name }}:
+          {% endif %}
+        </span>
+        <span class="chat-message">
+          {{ chat.chat }}
+        </span>
+        <span class="chat-date">
+          {{ chat.date.strftime('%Y-%m-%d') }}
+        </span>
+      </li>
+      {% else %}
+      <p>No chats available.</p>
+      {% endfor %}
+    </ul>
+  </div>
+  
+  <div class="button-block">
+    <form method="POST">
+      <textarea name="chat" id="chat" class="chat-area" required></textarea>
+      <br />
+      <div class="add-message">
+        <button type="submit" class="btn btn-primary">Add Message</button>
+      </div>
+    </form>
+  </div>
+
+
 </div>
 
-<div class="button-block">
-  <form method="POST">
-    <textarea name="chat" id="chat" class="chat-area" required></textarea>
-    <br />
-    <div align="center">
-      <button type="submit" class="btn btn-primary">Add Message</button>
-    </div>
-  </form>
-</div>
+
 
 
 {% endblock %}
