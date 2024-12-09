@@ -29,17 +29,6 @@
   bottom:0;
 }
 
-.input-block {
-  margin-top: 60px; /* Adjust based on your navbar height */
-  width: 90%;
-  height: 750px; /* Adjust height to keep below navbar and maintain spacing */
-  overflow-y: auto; /* Enable scrolling */
-  border: 1px solid #ccc;
-  padding: 10px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-}
-
 .data-list {
   list-style-type: none;
   padding: 0;
@@ -89,3 +78,28 @@
   margin-top: 5px;
 }
 
+
+.input-block {
+  position: relative; /* Establishes a positioning context */
+  margin-top: 0;
+  width: 500px;
+  height: 750px; /* Keeps height as defined */
+  overflow-y: auto; /* Enables scrolling */
+  border: 1px solid #ccc;
+  padding: 40px 40px 80px; /* Adds extra padding at the bottom for the fixed button */
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  margin-left: 220px;
+}
+
+.button-block {
+  position: fixed; /* Position relative to .input-block */
+  top: 550px; /* Stick to the bottom */
+  left: 0; /* Align to the left edge */
+  width: auto; /* Stretch to the full width of the container */
+  background-color: #f9f9f9; /* Matches the background color */
+  border-top: 1px solid #ccc; /* Optional: visual separation from the content */
+  padding: 10px; /* Spacing inside the button block */
+  text-align: center; /* Centers the button inside */
+}

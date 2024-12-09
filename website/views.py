@@ -79,7 +79,7 @@ def add_admin():
     new_admin = Admin(email=email, full_name=full_name, password=password)
     db.session.add(new_admin)
     db.session.commit()
-    flash('User added successfully!', category='success')
+    flash('Admin added successfully!', category='success')
     return redirect(url_for('views.admin_dashboard'))
 
 @views.route('/add-user', methods=['POST'])
