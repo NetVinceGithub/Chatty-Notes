@@ -5,6 +5,12 @@
 <div class="input-block">
   <div>
     <p class="lounge">Lounge</p>
+    <form method="POST">
+      <textarea name="chat" id="chat" class="chat-area" required></textarea>
+      <div class="add-message">
+        <button type="submit" class="btn btn-primary">Add Message</button>
+      </div>
+    </form>
     <ul class="data-list" id="notes">
       {% for chat in chats %}
       <li 
@@ -27,15 +33,6 @@
     </ul>
   </div>
   
-  <div class="button-block">
-    <form method="POST">
-      <textarea name="chat" id="chat" class="chat-area" required></textarea>
-      <br />
-      <div class="add-message">
-        <button type="submit" class="btn btn-primary">Add Message</button>
-      </div>
-    </form>
-  </div>
 
 
 </div>
