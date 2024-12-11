@@ -49,3 +49,10 @@
   list-style: none;
 }
 
+.input-block{
+  margin:auto;
+}
+
+.button-block{
+  right: 0px;
+}
