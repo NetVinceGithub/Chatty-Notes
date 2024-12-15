@@ -12,5 +12,21 @@
 
 .delete-all-chat{
   background-color: aliceblue;
+  padding:0px;
 }
 
+.delete-button{
+  width: 100%;
+  padding: 10px;
+  background-color: #222222;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+  background-color: #000000;
+}

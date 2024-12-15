@@ -1,10 +1,10 @@
-{% extends "base.html" %} 
+{% extends "index.html" %} 
 {% block title %}Home{% endblock %} 
 {% block content %}
 
 
 <div align="center" class="input-block">
-  <p class="links">Links</p>
+  <p class="links">Notes</p>
   <ul class="data-list" id="notes">
     {% for note in user.notes %}
     <li class="data-list">
